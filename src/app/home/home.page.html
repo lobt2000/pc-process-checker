@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> PC Checker </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <h3>
+      {{pcStatus ? 'PC is on now! Boot time: ' + (pcStatus | date: 'd-MM-YYYY hh:mm:ss') : 'PC is off now'}}
+    </h3>
+
+    <div class="procces-block">
+      <p class="procces-block__title">Process list</p>
+      <ion-button (click)="getPcProcess()">Get Procces list</ion-button>
+    </div>
+
+    <div class="procces-list">
+      <ion-input
+        label="Search the process"
+        [formControl]="searchProcess"
+      ></ion-input>
+      <ion-list>
+        @for (process of pcProcesses | filter: searchProcess.value; track
+        process.id) {
+        <ion-item>
+          <ion-label>{{process.name}}</ion-label>
+          <ion-button color="danger" (click)="terminateProcess(process.id)"
+            >Kill Process</ion-button
+          >
+        </ion-item>
+        }
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

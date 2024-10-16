@@ -1,0 +1,7 @@
+{
+  "name": "pc-checker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
