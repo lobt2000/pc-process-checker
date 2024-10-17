@@ -12,8 +12,10 @@
   </ion-header>
 
   <div id="container">
+    <ion-button color="danger" (click)="turnOff()">Turn Off PC</ion-button>
+    <ion-button (click)="getPcStatus()">Get PC status</ion-button>
     <h3>
-      {{pcStatus ? 'PC is on now! Boot time: ' + (pcStatus | date: 'd-MM-YYYY hh:mm:ss') : 'PC is off now'}}
+      {{pcStatus ? 'PC is on now! Boot time: ' + (pcStatus) : 'PC is off now'}}
     </h3>
 
     <div class="procces-block">

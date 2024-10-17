@@ -8,7 +8,7 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  IonInput
+  IonInput,
 } from '@ionic/angular/standalone';
 import { PcService } from '../services/pc.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -35,7 +35,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     DatePipe,
     FilterPipe,
     IonInput,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
 export class HomePage implements OnInit {
@@ -50,6 +50,8 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.getPcStatus();
     this.socketService.getPcBootTime.subscribe((res) => {
+      console.log(res);
+
       this.pcStatus = res ?? '';
     });
 
@@ -59,10 +61,7 @@ export class HomePage implements OnInit {
   }
 
   getPcStatus() {
-    this.pcService
-      .getPcStatus()
-      .pipe(takeUntilDestroyed(this.dr))
-      .subscribe(() => (this.pcStatus = ''));
+    this.pcService.getPcStatus().pipe(takeUntilDestroyed(this.dr)).subscribe();
   }
 
   getPcProcess() {
@@ -70,6 +69,13 @@ export class HomePage implements OnInit {
   }
 
   terminateProcess(pid: number) {
-    this.pcService.terminateProcess(pid).subscribe();
+    this.pcService
+      .terminateProcess(pid)
+      .pipe(takeUntilDestroyed(this.dr))
+      .subscribe();
+  }
+
+  turnOff() {
+    this.pcService.turnOffPc().pipe(takeUntilDestroyed(this.dr)).subscribe();
   }
 }

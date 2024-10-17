@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,9 @@ export class PcService {
 
   terminateProcess(pid: number): Observable<unknown> {
     return this.http.post(`${this.#urlApi}/api/v1/process`, { pid });
+  }
+
+  turnOffPc(): Observable<unknown> {
+    return this.http.post(`${this.#urlApi}/api/v1/pc/turn-off`, {});
   }
 }
